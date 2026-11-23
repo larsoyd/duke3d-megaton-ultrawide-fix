@@ -12,6 +12,7 @@
     <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
     <WizardDefaultWidth>720</WizardDefaultWidth>
     <WizardDefaultHeight>520</WizardDefaultHeight>
-    <WizardStyle>Modern</WizardStyle>
+    <WizardStyle>Classic</WizardStyle>
+    <Watermark>watermark.png</Watermark>
     <ControlScript>controlscript.qs</ControlScript>
 </Installer>
