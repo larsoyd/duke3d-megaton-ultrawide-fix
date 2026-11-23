@@ -28,10 +28,10 @@ At 2560 pixels and below the game draws the same picture as before.
 ## Requirements
 
 - Duke Nukem 3D: Megaton Edition from Steam, the native Linux version (Steam app 225140, build 610450).
-- `xdelta3` and `sha256sum`. On Arch: `pacman -S xdelta3`. On Debian or Ubuntu: `apt install xdelta3`.
+- A 64-bit Linux desktop with glibc 2.28 or newer, which covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland.
 - No root access.
 
-The installer works with this executable:
+The fix works with this executable:
 
 | file | checksum |
 | --- | --- |
@@ -42,37 +42,43 @@ It leaves any other version alone. The Windows build and the 20th Anniversary Wo
 
 ## Install
 
-Quit the game, then run:
+Quit the game, then download `DukeNukem3D-Megaton-UltrawideFix-1.0.0.run` from the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases) and run it:
+
+```sh
+chmod +x DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
+./DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
+```
+
+The installer asks for two things:
+
+- The game folder. It fills this in when the game is in the default Steam library, otherwise use Browse.
+- The resolution. It fills this in from your main screen. The game then starts at that size without a trip to the video menu. Leave it empty to keep the game's own setting.
+
+It installs a small helper and an uninstaller in `~/.local/share/duke3d-megaton-ultrawide-fix`, then patches the game:
+
+1. Checks the checksum of `bin/duke3d`. It stops if the file is a version it doesn't know.
+2. Copies the original to `bin/duke3d.megaton-original` and checks the copy.
+3. Builds the patched file next to the game, checks its checksum and moves it into place.
+4. Writes the resolution to `gameroot/duke3d-local.cfg` and keeps the previous values.
+
+## Uninstall
+
+Run `~/.local/share/duke3d-megaton-ultrawide-fix/uninstall-ultrawide-fix` and choose to remove everything. It puts the original game file and your previous screen settings back. If the backup is gone, Steam can restore the original with Properties > Installed Files > Verify integrity of game files.
+
+## Without the graphical installer
+
+The same fix is available as shell scripts, which need `xdelta3` (Arch: `pacman -S xdelta3`, Debian or Ubuntu: `apt install xdelta3`):
 
 ```sh
 git clone https://github.com/larsoyd/duke3d-megaton-ultrawide-fix
 cd duke3d-megaton-ultrawide-fix
 ./install.sh
-```
-
-The installer looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. If it finds more than one copy, or none, give it the game folder:
-
-```sh
-./install.sh --game-dir "$HOME/.local/share/Steam/steamapps/common/Duke Nukem 3D"
-```
-
-Steps it takes:
-
-1. Checks the checksum of `bin/duke3d`. It stops if the file is already patched or is a version it doesn't know.
-2. Checks the checksum of the patch file.
-3. Copies the original to `bin/duke3d.megaton-original` and checks the copy. If that file already exists it has to be the original.
-4. Builds the patched file next to the game and checks its checksum.
-5. Gives it the same permissions and moves it into place.
-
-After that, pick your resolution in the game's video options and quit through the game's menu to save it.
-
-## Uninstall
-
-```sh
 ./uninstall.sh
 ```
 
-It checks the backup and the current file, puts the original back and removes the backup. If the current file is a version it doesn't know, it leaves it alone. If the backup is gone, Steam can restore the original with Properties > Installed Files > Verify integrity of game files.
+`install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it.
+
+The helper the graphical installer uses also works on its own: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR`.
 
 ## Tested resolutions
 
@@ -93,14 +99,15 @@ The engine has a separate height limit of 1600 pixels that this patch doesn't ch
 
 ## Steam updates and file verification
 
-Megaton Edition has been off sale since 2016 and its build hasn't changed since. If Steam updates the game, or you verify the game files, the original executable comes back. Run `./install.sh` again afterwards.
+Megaton Edition has been off sale since 2016 and its build hasn't changed since. If Steam updates the game, or you verify the game files, the original executable comes back. Run the installer again afterwards.
 
 ## Troubleshooting
 
 - `refused: unknown executable`: the game is a different build, or something else has changed it. Verify the game files in Steam and try again.
 - `refused: game not found`: add `--game-dir` with the folder that contains `bin/duke3d`.
 - `refused: backup ... is not the original`: there is already a different file called `duke3d.megaton-original`. Move it somewhere else and run the installer again.
-- `xdelta3 is not installed`: install the `xdelta3` package.
+- `xdelta3 is not installed` from `install.sh`: install the `xdelta3` package, or use the graphical installer.
+- The installer doesn't start and mentions a missing `libxcb` or `libxkbcommon` library: install your distribution's Qt or X11 runtime packages, or use `install.sh`.
 - The game starts at the wrong resolution: it saves video settings when you quit through its menu. Closing the window another way loses them.
 
 ## How it's built and tested
@@ -110,6 +117,7 @@ Megaton Edition has been off sale since 2016 and its build hasn't changed since.
 - `tools/make_patch.py ORIGINAL OUT` builds the patched executable from the original and the change list, checking each old value and both checksums. You can use it to rebuild the patch yourself.
 - `tests/test_install.sh` runs the installer and uninstaller against fake game folders: wrong checksums, a damaged patch file, a wrong result, an existing foreign backup, permissions, and finding the game in Steam libraries.
 - `tests/test_make_patch.py` tests the build tool the same way.
+- `engine/` is the helper the graphical installer runs, with its own tests (`go test ./...`). `installer/` is the Qt Installer Framework package around it.
 - `tests/lint.sh` runs ShellCheck.
 - `tests/integrity/harness.sh` starts the real game from a copy of the game folder on a virtual display with sound off, enters a level and checks the view size and the gaps after the moved buffers. It also checks a screenshot of the 3D view. With `--exit-test` it quits through the menu and checks that the settings file was written. It needs Steam running, plus `Xvfb`, `xdotool`, `gdb` and ImageMagick. It won't run on a folder inside a Steam library, and it doesn't upload anything to Steam Cloud.
 
@@ -121,7 +129,7 @@ bash tests/integrity/harness.sh --game-copy /tmp/duke-copy --exe /tmp/duke3d-pat
 
 ## Repository contents
 
-Scripts, documentation and a 1.7 KB patch file. The patch file holds the new address values and instructions to copy everything else from your own executable. It contains no game code, and the repository has no game files.
+Scripts, the installer sources, documentation and a 1.7 KB patch file. The patch file holds the new address values and instructions to copy everything else from your own executable. It contains no game code, and the repository has no game files.
 
 ## Credits
 
