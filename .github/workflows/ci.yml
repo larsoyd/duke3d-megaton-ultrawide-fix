@@ -1,0 +1,28 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: sudo apt-get update && sudo apt-get install -y xdelta3 shellcheck
+      - name: lint
+        run: bash tests/lint.sh
+      - name: installer tests
+        run: bash tests/test_install.sh
+      - name: rebuild tool tests
+        run: python3 -m unittest tests/test_make_patch.py
+      - name: release checksums
+        run: sha256sum -c SHA256SUMS
+      - name: manifest matches delta
+        run: |
+          set -euo pipefail
+          d=patches/megaton-1.4.9-linux
+          want=$(grep '^DELTA_SHA256=' "$d/manifest" | cut -d= -f2)
+          test "$(sha256sum "$d/duke3d.xdelta" | cut -d' ' -f1)" = "$want"
+          test "$(wc -l < "$d/changes.tsv")" = 353
+          xdelta3 printhdr "$d/duke3d.xdelta" > /dev/null
