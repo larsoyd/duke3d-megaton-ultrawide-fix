@@ -38,6 +38,30 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="resIntro">
+     <property name="text">
+      <string>Screen resolution to start the game at. Leave it empty to keep the game's own setting.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="resolution">
+     <property name="placeholderText">
+      <string>3440x1440</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="resState">
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="spacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
