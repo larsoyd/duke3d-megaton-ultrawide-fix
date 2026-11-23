@@ -1,6 +1,6 @@
 # duke3d-megaton-ultrawide-fix
 
-Lets the native Linux build of Duke Nukem 3D: Megaton Edition (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440.
+Lets the native Linux build of the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440.
 
 Without it the game world turns black at those widths and only the menus and the status bar are drawn.
 
