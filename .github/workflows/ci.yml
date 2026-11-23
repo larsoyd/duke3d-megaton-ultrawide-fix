@@ -59,7 +59,7 @@ jobs:
       - name: build
         run: |
           set -euo pipefail
-          "$IFW_BIN/binarycreator" --version | head -3
+          ls "$IFW_BIN"
           "$IFW_BIN/binarycreator" --offline-only -c installer/config/config.xml -p installer/packages DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
           sha256sum DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
       - uses: actions/upload-artifact@v4
