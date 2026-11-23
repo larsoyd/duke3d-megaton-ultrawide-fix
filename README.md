@@ -8,7 +8,7 @@ This is an unofficial fix. It changes the game executable you already have, keep
 
 ## Why the screen goes black
 
-Megaton Edition is built on JFBuild, a port of the Build engine. The engine sets a maximum screen width of 2560 in `jfbuild/build.h` (`MAXXDIM`) and sizes 15 per-column buffers to it: `umost`, `dmost`, `startumost`, `startdmost`, `bakumost`, `bakdmost`, `uplc`, `dplc`, `uwall`, `dwall`, `swplc`, `lplc`, `swall`, `lwall` and `radarang2`.
+Megaton Edition is built on [JFBuild](https://github.com/jonof/jfbuild), a port of the Build engine. The engine sets a maximum screen width of 2560 in `jfbuild/build.h` (`MAXXDIM`) and sizes 15 per-column buffers to it: `umost`, `dmost`, `startumost`, `startdmost`, `bakumost`, `bakdmost`, `uplc`, `dplc`, `uwall`, `dwall`, `swplc`, `lplc`, `swall`, `lwall` and `radarang2`.
 
 `setview()` and `drawrooms()` in `jfbuild/engine.c` fill those buffers for every column on screen. At 3440 columns they run 880 entries past the end and overwrite the variables stored after them. One of them is `ydimen`, the height of the 3D view. With a height of 0 the camera projection and fog break down, and walls, floors and sprites all come out black.
 
