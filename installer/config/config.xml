@@ -14,5 +14,6 @@
     <WizardDefaultHeight>520</WizardDefaultHeight>
     <WizardStyle>Classic</WizardStyle>
     <Watermark>watermark.png</Watermark>
+    <WizardShowPageList>false</WizardShowPageList>
     <ControlScript>controlscript.qs</ControlScript>
 </Installer>
