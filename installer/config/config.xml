@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Duke Nukem 3D Megaton Ultrawide Fix</Name>
+    <Version>1.0.0</Version>
+    <Title>Duke Nukem 3D: Megaton Edition Ultrawide Fix</Title>
+    <Publisher>larsoyd</Publisher>
+    <ProductUrl>https://github.com/larsoyd/duke3d-megaton-ultrawide-fix</ProductUrl>
+    <TargetDir>@HomeDir@/.local/share/duke3d-megaton-ultrawide-fix</TargetDir>
+    <MaintenanceToolName>uninstall-ultrawide-fix</MaintenanceToolName>
+    <RemoveTargetDir>true</RemoveTargetDir>
+    <AllowSpaceInPath>true</AllowSpaceInPath>
+    <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
+    <WizardDefaultWidth>720</WizardDefaultWidth>
+    <WizardDefaultHeight>520</WizardDefaultHeight>
+</Installer>

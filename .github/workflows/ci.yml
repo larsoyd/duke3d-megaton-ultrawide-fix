@@ -16,6 +16,11 @@ jobs:
         run: bash tests/test_install.sh
       - name: rebuild tool tests
         run: python3 -m unittest tests/test_make_patch.py
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: engine tests
+        run: go vet ./... && go test ./...
       - name: release checksums
         run: sha256sum -c SHA256SUMS
       - name: manifest matches delta
@@ -26,3 +31,37 @@ jobs:
           test "$(sha256sum "$d/duke3d.xdelta" | cut -d' ' -f1)" = "$want"
           test "$(wc -l < "$d/changes.tsv")" = 353
           xdelta3 printhdr "$d/duke3d.xdelta" > /dev/null
+  installer:
+    runs-on: ubuntu-22.04
+    needs: test
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: engine
+        run: |
+          set -euo pipefail
+          pkg=installer/packages/io.github.larsoyd.duke3dultrawide
+          mkdir -p "$pkg/data"
+          CGO_ENABLED=0 go build -trimpath -ldflags='-s -w -buildid=' -o "$pkg/data/duke3d-ultrawide" ./cmd/duke3d-ultrawide
+          cp README.md LICENSE "$pkg/data/"
+      - name: installer framework
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet aqtinstall
+          tool=$(python3 -m aqt list-tool linux desktop tools_ifw | grep -o 'qt.tools.ifw.[0-9]*' | sort -V | tail -1)
+          python3 -m aqt install-tool linux desktop tools_ifw "$tool" --outputdir "$RUNNER_TEMP/qt"
+          echo "IFW_BIN=$(dirname "$(find "$RUNNER_TEMP/qt" -name binarycreator -type f | head -1)")" >> "$GITHUB_ENV"
+      - name: build
+        run: |
+          set -euo pipefail
+          "$IFW_BIN/binarycreator" --version | head -3
+          "$IFW_BIN/binarycreator" --offline-only -c installer/config/config.xml -p installer/packages DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
+          sha256sum DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installer
+          path: DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
+          retention-days: 14
