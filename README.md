@@ -42,7 +42,9 @@ It leaves any other version alone. The Windows build and the 20th Anniversary Wo
 
 ## Install
 
-Quit the game, then download `DukeNukem3D-Megaton-UltrawideFix-1.0.0.run` from the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases) and run it:
+Quit the game, then download `DukeNukem3D-Megaton-UltrawideFix-1.0.0.tar.gz` from the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases), extract it and double-click the installer inside.
+
+The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
 
 ```sh
 chmod +x DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
