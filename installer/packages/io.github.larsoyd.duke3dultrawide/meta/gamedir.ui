@@ -6,10 +6,20 @@
    <string>Game folder</string>
   </property>
   <layout class="QVBoxLayout" name="layout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="dirTitle">
+     <property name="text">
+      <string>&lt;b&gt;Game folder&lt;/b&gt;</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QLabel" name="intro">
      <property name="text">
-      <string>Choose the Duke Nukem 3D folder in your Steam library. It contains a folder called bin with the game in it.</string>
+      <string>The Duke Nukem 3D folder in your Steam library. It has a folder called bin inside.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -32,15 +42,41 @@
    </item>
    <item>
     <widget class="QLabel" name="state">
+     <property name="styleSheet">
+      <string>color: palette(mid);</string>
+     </property>
      <property name="wordWrap">
       <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="gap">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>18</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="resTitle">
+     <property name="text">
+      <string>&lt;b&gt;Resolution&lt;/b&gt;</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="resIntro">
      <property name="text">
-      <string>Screen resolution to start the game at. Leave it empty to keep the game's own setting.</string>
+      <string>The game will start at this size. It is filled in from your main screen. Leave it empty to keep the game's own setting.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -48,14 +84,31 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="resolution">
-     <property name="placeholderText">
-      <string>3440x1440</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="resRow">
+     <item>
+      <widget class="QLineEdit" name="resolution">
+       <property name="placeholderText">
+        <string>for example 3440x1440</string>
+       </property>
+       <property name="maximumWidth">
+        <number>220</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="resFill">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QLabel" name="resState">
+     <property name="styleSheet">
+      <string>color: palette(mid);</string>
+     </property>
      <property name="wordWrap">
       <bool>true</bool>
      </property>

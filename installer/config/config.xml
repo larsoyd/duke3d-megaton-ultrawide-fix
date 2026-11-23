@@ -12,4 +12,6 @@
     <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
     <WizardDefaultWidth>720</WizardDefaultWidth>
     <WizardDefaultHeight>520</WizardDefaultHeight>
+    <WizardStyle>Modern</WizardStyle>
+    <ControlScript>controlscript.qs</ControlScript>
 </Installer>

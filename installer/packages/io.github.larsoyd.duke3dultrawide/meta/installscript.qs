@@ -1,5 +1,5 @@
 var steamGame = "/.local/share/Steam/steamapps/common/Duke Nukem 3D";
-var primaryScreen = "xrandr --query 2>/dev/null | sed -n 's/.* connected primary \\([0-9]*x[0-9]*\\)+.*/\\1/p' | head -n 1";
+var primaryScreen = "x=$(xrandr --query 2>/dev/null); { echo \"$x\" | sed -n 's/.* connected primary \\([0-9]*x[0-9]*\\)+.*/\\1/p'; echo \"$x\" | sed -n 's/.* connected \\([0-9]*x[0-9]*\\)+.*/\\1/p'; } | head -n 1";
 
 function Component()
 {
@@ -10,6 +10,7 @@ Component.prototype.loaded = function()
 {
     if (!installer.isInstaller())
         return;
+    installer.setDefaultPageVisible(QInstaller.ComponentSelection, false);
     if (installer.addWizardPage(component, "GameDirPage", QInstaller.ReadyForInstallation)) {
         var page = component.userInterface("GameDirPage");
         page.browse.clicked.connect(this, Component.prototype.browse);
@@ -51,7 +52,7 @@ Component.prototype.check = function()
     var res = page.resolution.text.trim();
     var dirOk = dir != "" && installer.fileExists(dir + "/bin/duke3d");
     var problem = resolutionProblem(res);
-    page.state.text = dirOk ? "Found the game." : "No bin/duke3d in this folder.";
+    page.state.text = dirOk ? "Found the game." : "This folder has no bin/duke3d.";
     page.resState.text = problem;
     gui.pageWidgetByObjectName("DynamicGameDirPage").complete = dirOk && problem == "";
     installer.setValue("GameDir", dirOk ? dir : "");
