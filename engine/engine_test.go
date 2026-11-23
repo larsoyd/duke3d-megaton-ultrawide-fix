@@ -255,3 +255,82 @@ func TestResolveGame(t *testing.T) {
 	_, err = ResolveGame(f.home, filepath.Join(f.home, "nowhere"))
 	wantRefused(t, err, "game not found")
 }
+
+func (f *fixture) cfg(t *testing.T) string {
+	t.Helper()
+	b, err := os.ReadFile(filepath.Join(f.game, "gameroot", LocalConfig))
+	if err != nil {
+		return "<absent>"
+	}
+	return string(b)
+}
+
+func TestResolutionOnMissingConfig(t *testing.T) {
+	f := newFixture(t)
+	if err := SetResolution(f.game, 3440, 1440); err != nil {
+		t.Fatal(err)
+	}
+	got := f.cfg(t)
+	for _, want := range []string{"[Screen Setup]", "ScreenWidth = 3440", "ScreenHeight = 1440", "ScreenMode = 1", "ScreenBPP = 32"} {
+		if !strings.Contains(got, want) {
+			t.Fatalf("config lacks %q:\n%s", want, got)
+		}
+	}
+	if err := RestoreResolution(f.game); err != nil {
+		t.Fatal(err)
+	}
+	if got := f.cfg(t); got != "<absent>" {
+		t.Fatalf("config should be gone again, got:\n%s", got)
+	}
+}
+
+func TestResolutionKeepsOtherSettings(t *testing.T) {
+	f := newFixture(t)
+	orig := "[Screen Setup]\nShadows = 1\nScreenWidth = 1920\nScreenHeight = 1080\nScreenMode = 0\nScreenGamma = 4\n"
+	if err := os.MkdirAll(filepath.Join(f.game, "gameroot"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	f.write(t, "gameroot/"+LocalConfig, []byte(orig), 0o644)
+	if err := SetResolution(f.game, 3440, 1440); err != nil {
+		t.Fatal(err)
+	}
+	got := f.cfg(t)
+	for _, want := range []string{"Shadows = 1", "ScreenGamma = 4", "ScreenWidth = 3440", "ScreenHeight = 1440", "ScreenMode = 1"} {
+		if !strings.Contains(got, want) {
+			t.Fatalf("config lacks %q:\n%s", want, got)
+		}
+	}
+	if strings.Contains(got, "1920") {
+		t.Fatalf("old width left behind:\n%s", got)
+	}
+	if err := SetResolution(f.game, 2560, 1080); err != nil {
+		t.Fatal(err)
+	}
+	if err := RestoreResolution(f.game); err != nil {
+		t.Fatal(err)
+	}
+	if got := f.cfg(t); got != orig {
+		t.Fatalf("restore changed the file:\n%s", got)
+	}
+}
+
+func TestResolutionLimits(t *testing.T) {
+	f := newFixture(t)
+	for _, wh := range [][2]int{{3840, 2160}, {9000, 1440}, {100, 100}} {
+		wantRefused(t, SetResolution(f.game, wh[0], wh[1]), "resolution")
+	}
+	if got := f.cfg(t); got != "<absent>" {
+		t.Fatalf("refused resolution wrote a config:\n%s", got)
+	}
+}
+
+func TestParseResolution(t *testing.T) {
+	if w, h, err := ParseResolution("3440x1440"); err != nil || w != 3440 || h != 1440 {
+		t.Fatalf("%d %d %v", w, h, err)
+	}
+	for _, bad := range []string{"", "3440", "3440x", "x1440", "3440*1440", "a x b"} {
+		if _, _, err := ParseResolution(bad); err == nil {
+			t.Fatalf("accepted %q", bad)
+		}
+	}
+}
