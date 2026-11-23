@@ -2,6 +2,11 @@ name: ci
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: draft release tag to attach the installer to
+        required: true
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -34,6 +39,8 @@ jobs:
   installer:
     runs-on: ubuntu-22.04
     needs: test
+    permissions:
+      contents: write
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -62,8 +69,12 @@ jobs:
           ls "$IFW_BIN"
           "$IFW_BIN/binarycreator" --offline-only -c installer/config/config.xml -p installer/packages DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
           sha256sum DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
-      - uses: actions/upload-artifact@v4
-        with:
-          name: installer
-          path: DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
-          retention-days: 14
+      - name: attach to draft release
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.release }}
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$TAG" --json isDraft -q .isDraft)" = true
+          gh release upload "$TAG" DukeNukem3D-Megaton-UltrawideFix-1.0.0.run --clobber
