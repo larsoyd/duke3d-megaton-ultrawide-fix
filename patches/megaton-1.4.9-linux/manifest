@@ -1,0 +1,6 @@
+GAME=Duke Nukem 3D: Megaton Edition, native Linux, Steam app 225140, build 610450
+ORIGINAL_SHA256=3caf660ad2df2e55fbaf60b9fca6afa6e1f5e17e402c37b39a6579bcc67c68db
+PATCHED_SHA256=0f3a86db7084036a28043cfd37d6bdf2c36cbd7cee4292e65990196ee1df66c2
+DELTA=duke3d.xdelta
+DELTA_SHA256=e4ef015c9cf8d95162e3c21c11cfb9b13405782b76a3bb1cfe55c7457e387306
+CHANGES=changes.tsv
