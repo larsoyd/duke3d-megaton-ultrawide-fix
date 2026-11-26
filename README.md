@@ -18,18 +18,18 @@ Quit the game first. The installers are on the [releases page](https://github.co
 
 ### Linux
 
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.0.tar.gz`, extract it and double-click the installer inside.
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside.
 
 The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
 
 ```sh
-chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.0.run
-./DukeNukem3D-Megaton-UltrawideFix-1.1.0.run
+chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
+./DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ```
 
 ### Windows
 
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.0.exe` and run it. The installer isn't signed, so Windows may show a "Windows protected your PC" box. Choose More info, then Run anyway.
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer isn't signed, so Windows may show a "Windows protected your PC" box. Choose More info, then Run anyway.
 
 ### What the installer does
 
