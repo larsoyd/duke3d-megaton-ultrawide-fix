@@ -1,0 +1,6 @@
+GAME=Duke Nukem 3D: Megaton Edition, Windows, Steam app 225140, build 610450
+ORIGINAL_SHA256=0782cf3803b847f55ec06c031eb6046c0f9edd1b49b31db30673254b99704d45
+PATCHED_SHA256=6feb94dbb140bbc57a371da42979dc4ef0bb6e1b2d89ff3a88bfb11a64045d0a
+EXE=bin/duke3d.exe
+BACKUP=duke3d.exe.megaton-original
+CHANGES=changes.tsv
