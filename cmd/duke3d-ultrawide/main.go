@@ -19,13 +19,10 @@ func run(args []string, home string) (string, error) {
 	cmd := args[0]
 	fs := flag.NewFlagSet(cmd, flag.ContinueOnError)
 	fs.SetOutput(io.Discard)
-	dir := fs.String("game-dir", "", "game folder that contains bin/duke3d")
+	dir := fs.String("game-dir", "", "game folder that contains bin/duke3d or bin/duke3d.exe")
 	res := fs.String("resolution", "", "screen size to save in the game settings, such as 3440x1440")
 	if err := fs.Parse(args[1:]); err != nil {
 		return "", fmt.Errorf("refused: %v, %s", err, usage)
-	}
-	if cmd == "locate" {
-		return strings.Join(engine.Locate(home), "\n"), nil
 	}
 	w, h := 0, 0
 	if *res != "" {
@@ -37,27 +34,30 @@ func run(args []string, home string) (string, error) {
 			return "", err
 		}
 	}
-	patch, err := engine.Embedded()
+	patches, err := engine.Embedded()
 	if err != nil {
 		return "", err
 	}
-	game, err := engine.ResolveGame(home, *dir)
+	if cmd == "locate" {
+		return strings.Join(engine.Locate(patches, home), "\n"), nil
+	}
+	game, err := engine.ResolveGame(patches, home, *dir)
 	if err != nil {
 		return "", err
 	}
 	var msg string
 	switch cmd {
 	case "status":
-		msg, err = engine.Status(patch, game)
+		msg, err = engine.Status(patches, game)
 	case "install":
-		if msg, err = engine.Install(patch, game); err == nil && w > 0 {
+		if msg, err = engine.Install(patches, game); err == nil && w > 0 {
 			if err = engine.SetResolution(game, w, h); err == nil {
 				msg += fmt.Sprintf(" resolution=%dx%d", w, h)
 			}
 		}
 	case "uninstall":
 		if err = engine.RestoreResolution(game); err == nil {
-			msg, err = engine.Uninstall(patch, game)
+			msg, err = engine.Uninstall(patches, game)
 		}
 	default:
 		err = fmt.Errorf("refused: %s", usage)

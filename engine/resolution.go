@@ -39,19 +39,23 @@ func keyOf(line string) string {
 	return strings.TrimSpace(k)
 }
 
-func readLines(path string) ([]string, bool, error) {
+func readLines(path string) ([]string, string, bool, error) {
 	b, err := os.ReadFile(path)
 	if os.IsNotExist(err) {
-		return nil, false, nil
+		return nil, "\n", false, nil
 	}
 	if err != nil {
-		return nil, false, err
+		return nil, "", false, err
 	}
-	return strings.Split(strings.TrimSuffix(string(b), "\n"), "\n"), true, nil
+	eol := "\n"
+	if strings.Contains(string(b), "\r\n") {
+		eol = "\r\n"
+	}
+	return strings.Split(strings.TrimSuffix(string(b), eol), eol), eol, true, nil
 }
 
-func writeLines(path string, lines []string) error {
-	return writeBeside(path, []byte(strings.Join(lines, "\n")+"\n"), 0o644)
+func writeLines(path string, lines []string, eol string) error {
+	return writeBeside(path, []byte(strings.Join(lines, eol)+eol), 0o644)
 }
 
 func sectionBounds(lines []string) (int, int) {
@@ -111,7 +115,7 @@ func SetResolution(game string, w, h int) error {
 		return err
 	}
 	cfg := filepath.Join(dir, LocalConfig)
-	lines, exists, err := readLines(cfg)
+	lines, eol, exists, err := readLines(cfg)
 	if err != nil {
 		return err
 	}
@@ -128,24 +132,24 @@ func SetResolution(game string, w, h int) error {
 			}
 			saved = append(saved, k+"\t"+line)
 		}
-		if err := writeLines(state, saved); err != nil {
+		if err := writeLines(state, saved, "\n"); err != nil {
 			return err
 		}
 	}
 	return writeLines(cfg, setKeys(lines, map[string]string{
 		"ScreenWidth": fmt.Sprintf("ScreenWidth = %d", w), "ScreenHeight": fmt.Sprintf("ScreenHeight = %d", h),
-		"ScreenMode": "ScreenMode = 1", "ScreenBPP": "ScreenBPP = 32"}))
+		"ScreenMode": "ScreenMode = 1", "ScreenBPP": "ScreenBPP = 32"}), eol)
 }
 
 func RestoreResolution(game string) error {
 	dir := filepath.Join(game, "gameroot")
 	state := filepath.Join(dir, previous)
-	saved, ok, err := readLines(state)
+	saved, _, ok, err := readLines(state)
 	if err != nil || !ok {
 		return err
 	}
 	cfg := filepath.Join(dir, LocalConfig)
-	lines, _, err := readLines(cfg)
+	lines, eol, _, err := readLines(cfg)
 	if err != nil {
 		return err
 	}
@@ -158,7 +162,7 @@ func RestoreResolution(game string) error {
 	if saved[0] == "file=false" && len(lines) == 1 && strings.TrimSpace(lines[0]) == section {
 		err = os.Remove(cfg)
 	} else {
-		err = writeLines(cfg, lines)
+		err = writeLines(cfg, lines, eol)
 	}
 	if err != nil {
 		return err

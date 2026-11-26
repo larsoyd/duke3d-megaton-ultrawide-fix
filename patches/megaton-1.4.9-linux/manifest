@@ -4,3 +4,5 @@ PATCHED_SHA256=0f3a86db7084036a28043cfd37d6bdf2c36cbd7cee4292e65990196ee1df66c2
 DELTA=duke3d.xdelta
 DELTA_SHA256=e4ef015c9cf8d95162e3c21c11cfb9b13405782b76a3bb1cfe55c7457e387306
 CHANGES=changes.tsv
+EXE=bin/duke3d
+BACKUP=duke3d.megaton-original
