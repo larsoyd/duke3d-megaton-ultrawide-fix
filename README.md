@@ -18,11 +18,6 @@ This is an unofficial fix. It changes the game executable you already have, keep
 
 Quit the game first. The installers are on the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases).
 
-| installer | checksum | VirusTotal |
-| --- | --- | --- |
-| `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` | `sha256:e7263f7b7f6b1bf8131aa414b0b347fa9400544b68bc66d9bdae2bda8d9717d0` | [report](https://www.virustotal.com/gui/file/e7263f7b7f6b1bf8131aa414b0b347fa9400544b68bc66d9bdae2bda8d9717d0) |
-| `DukeNukem3D-Megaton-UltrawideFix-1.1.1.run` | `sha256:d98d0b756cdc96a261cc8a90c123c77d4ef1611e9103b2432598b8fa9d1fe42c` | [report](https://www.virustotal.com/gui/file/d98d0b756cdc96a261cc8a90c123c77d4ef1611e9103b2432598b8fa9d1fe42c) |
-
 ### Linux
 
 Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside.
