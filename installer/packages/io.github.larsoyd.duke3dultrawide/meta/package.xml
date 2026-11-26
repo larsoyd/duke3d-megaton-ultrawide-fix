@@ -2,7 +2,7 @@
 <Package>
     <DisplayName>Ultrawide fix</DisplayName>
     <Description>Lets the game render wider than 2560 pixels.</Description>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <ReleaseDate>2026-11-26</ReleaseDate>
     <Default>true</Default>
     <ForcedInstallation>true</ForcedInstallation>

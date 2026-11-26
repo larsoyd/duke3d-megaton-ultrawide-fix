@@ -42,10 +42,12 @@ Component.prototype.loaded = function()
         page.browse.clicked.connect(this, Component.prototype.browse);
         page.gameDir.textChanged.connect(this, Component.prototype.check);
         page.resolution.textChanged.connect(this, Component.prototype.check);
+        // read both defaults first, filling a field runs check() which overwrites them
         var guess = installer.value("GameDir", steamGuess());
-        page.gameDir.text = hasGame(guess) ? guess : "";
         var screen = installer.execute(primaryScreen[0], primaryScreen[1]);
-        page.resolution.text = installer.value("Resolution", screen ? String(screen[0]).trim() : "");
+        var res = installer.value("Resolution", screen ? String(screen[0]).trim() : "");
+        page.gameDir.text = hasGame(guess) ? guess : "";
+        page.resolution.text = res;
         Component.prototype.check();
     }
 }
