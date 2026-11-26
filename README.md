@@ -69,11 +69,11 @@ The fix works with these executables:
 | original `bin/duke3d.exe` sha256 | `0782cf3803b847f55ec06c031eb6046c0f9edd1b49b31db30673254b99704d45` |
 | patched `bin/duke3d.exe` sha256 | `6feb94dbb140bbc57a371da42979dc4ef0bb6e1b2d89ff3a88bfb11a64045d0a` |
 
-It leaves any other version alone. The 20th Anniversary World Tour edition is a different program and isn't supported.
+Any failure is most likely because you are using an **unsupported older version.** It leaves any other version alone. The 20th Anniversary World Tour edition is a different program and isn't supported.
 
-## Steam updates
+## Steam updates 
 
-Highly unlikely as Megaton Edition has been off sale since 2016 and its build hasn't changed since. But if Steam updates the game and you update or verify the game files, the original executable comes back and that new updated executable would not be supported. But again, unlikely.
+Highly unlikely as Megaton Edition has been off sale since 2016 and its build hasn't changed since. But if Steam updates the game and you update or verify the game files, the original executable comes back and that new updated executable would not be supported until an update of the fix. But again, unlikely.
 
 ## Troubleshooting
 
