@@ -62,10 +62,15 @@ It puts the original game file and your previous screen settings back. If the ba
 
 The fix works with these executables:
 
+Linux:
 | file | checksum |
 | --- | --- |
 | original `bin/duke3d` sha256 | `3caf660ad2df2e55fbaf60b9fca6afa6e1f5e17e402c37b39a6579bcc67c68db` |
 | patched `bin/duke3d` sha256 | `0f3a86db7084036a28043cfd37d6bdf2c36cbd7cee4292e65990196ee1df66c2` |
+
+Windows:
+| file | checksum |
+| --- | --- |
 | original `bin/duke3d.exe` sha256 | `0782cf3803b847f55ec06c031eb6046c0f9edd1b49b31db30673254b99704d45` |
 | patched `bin/duke3d.exe` sha256 | `6feb94dbb140bbc57a371da42979dc4ef0bb6e1b2d89ff3a88bfb11a64045d0a` |
 
