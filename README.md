@@ -6,9 +6,9 @@
 
 Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. macOS version is not supported but it does not work on macOS Catalina (10.15) or later anyways due to being 32-bit.
 
-Without it the native Linux game draws a black world at those widths, with only the menus and the status bar showing, and the Windows game crashes.
+**PROBLEM:** Without this fix the native Linux game draws a black world at those widths, with only the menus and the status bar showing, while the Windows game just crashes. The details are in [docs/how-it-works.md](docs/how-it-works.md)
 
-This is an unofficial fix. It changes the game executable you already have, keeps a backup of the original and can be undone.
+This is an unofficial fix. It changes the game executable you already have, keeps a backup of the original and can be undone by either restoring the backup or verifying integrity of game files.
 
 **NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered, and there are no plans to cover them for now.
 
