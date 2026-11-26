@@ -36,6 +36,7 @@ jobs:
           test "$(sha256sum "$d/duke3d.xdelta" | cut -d' ' -f1)" = "$want"
           test "$(wc -l < "$d/changes.tsv")" = 353
           xdelta3 printhdr "$d/duke3d.xdelta" > /dev/null
+          test "$(wc -l < patches/megaton-1.4.9-windows/changes.tsv)" = 399
   installer:
     runs-on: ubuntu-22.04
     needs: test
@@ -67,8 +68,10 @@ jobs:
         run: |
           set -euo pipefail
           ls "$IFW_BIN"
-          "$IFW_BIN/binarycreator" --offline-only -c installer/config/config.xml -p installer/packages DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
-          sha256sum DukeNukem3D-Megaton-UltrawideFix-1.0.0.run
+          v=$(sed -n 's#.*<Version>\(.*\)</Version>.*#\1#p' installer/config/config.xml)
+          echo "OUT=DukeNukem3D-Megaton-UltrawideFix-$v.run" >> "$GITHUB_ENV"
+          "$IFW_BIN/binarycreator" --offline-only -c installer/config/config.xml -p installer/packages "DukeNukem3D-Megaton-UltrawideFix-$v.run"
+          sha256sum "DukeNukem3D-Megaton-UltrawideFix-$v.run"
       - name: attach to draft release
         if: github.event_name == 'workflow_dispatch'
         env:
@@ -77,4 +80,53 @@ jobs:
         run: |
           set -euo pipefail
           test "$(gh release view "$TAG" --json isDraft -q .isDraft)" = true
-          gh release upload "$TAG" DukeNukem3D-Megaton-UltrawideFix-1.0.0.run --clobber
+          gh release upload "$TAG" "$OUT" --clobber
+  windows-installer:
+    runs-on: windows-latest
+    needs: test
+    permissions:
+      contents: write
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: engine tests
+        run: go vet ./... && go test ./...
+      - name: engine
+        run: |
+          set -euo pipefail
+          pkg=installer/packages/io.github.larsoyd.duke3dultrawide
+          mkdir -p "$pkg/data"
+          CGO_ENABLED=0 go build -trimpath -ldflags='-s -w -buildid=' -o "$pkg/data/duke3d-ultrawide.exe" ./cmd/duke3d-ultrawide
+          cp README.md LICENSE "$pkg/data/"
+      - name: screen query
+        shell: pwsh
+        run: Get-CimInstance Win32_VideoController | Where-Object CurrentHorizontalResolution | Select-Object -First 1 | ForEach-Object { '' + $_.CurrentHorizontalResolution + 'x' + $_.CurrentVerticalResolution }
+      - name: installer framework
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet aqtinstall
+          tool=$(python -m aqt list-tool windows desktop tools_ifw | grep -o 'qt.tools.ifw.[0-9]*' | sort -V | tail -1)
+          python -m aqt install-tool windows desktop tools_ifw "$tool" --outputdir "$RUNNER_TEMP/qt"
+          echo "IFW_BIN=$(dirname "$(find "$RUNNER_TEMP/qt" -name binarycreator.exe -type f | head -1)")" >> "$GITHUB_ENV"
+      - name: build
+        run: |
+          set -euo pipefail
+          v=$(sed -n 's#.*<Version>\(.*\)</Version>.*#\1#p' installer/config/config.xml)
+          echo "OUT=DukeNukem3D-Megaton-UltrawideFix-$v.exe" >> "$GITHUB_ENV"
+          "$IFW_BIN/binarycreator.exe" --offline-only -c installer/config/config.xml -p installer/packages "DukeNukem3D-Megaton-UltrawideFix-$v.exe"
+          sha256sum "DukeNukem3D-Megaton-UltrawideFix-$v.exe"
+      - name: attach to draft release
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.release }}
+        run: |
+          set -euo pipefail
+          test "$(gh release view "$TAG" --json isDraft -q .isDraft)" = true
+          gh release upload "$TAG" "$OUT" --clobber
