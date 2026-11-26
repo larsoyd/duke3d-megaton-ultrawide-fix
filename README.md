@@ -109,6 +109,11 @@ The helper the graphical installer uses also works on its own, with either build
 
 ---
 
+## Notes
+
+I am aware that the HUD does not stretch. That is a cosmetic fix that I ultimately decided was out of the scope for this project.
+
+
 ## Credits
 
 Duke Nukem 3D was made by 3D Realms. The Build engine is by Ken Silverman. JFBuild and JFDuke3D are by Jonathon Fowler. Megaton Edition was ported by Gennadiy Potapov and published by Devolver Digital. Its source analyzed purely for this patch is at [github.com/TermiT/duke3d-megaton](https://github.com/TermiT/duke3d-megaton). This project isn't affiliated with any of them, and the game names and trademarks belong to their owners.
