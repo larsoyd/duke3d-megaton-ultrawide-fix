@@ -40,7 +40,7 @@ Any failure is most likely because you are using an **unsupported older version.
 
 ## Install
 
-Quit the game first. The installers are on the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases).
+The installers are on the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases). The game must not be running when doing this operation.
 
 ### Windows
 
