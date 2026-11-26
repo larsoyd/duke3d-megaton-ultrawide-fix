@@ -1,4 +1,4 @@
-# duke3d-megaton-ultrawide-fix
+# Duke Nukem 3D: Megaton Edition - Ultrawide Fix
 
 <p align="center">
   <img src="docs/screenshot-3440x1440.jpg" alt="Duke Nukem 3D: Megaton Edition running at 3440x1440" width="560">
@@ -8,9 +8,11 @@ Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingw
 
 Without it the native Linux game draws a black world at those widths, with only the menus and the status bar showing, and the Windows game crashes.
 
-Ultrawide here means wide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered, and there are no plans to cover them for now.
-
 This is an unofficial fix. It changes the game executable you already have, keeps a backup of the original and can be undone.
+
+**NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered, and there are no plans to cover them for now.
+
+---
 
 ## Install
 
@@ -69,9 +71,9 @@ The fix works with these executables:
 
 It leaves any other version alone. The 20th Anniversary World Tour edition is a different program and isn't supported.
 
-## Steam updates and file verification
+## Steam updates
 
-Megaton Edition has been off sale since 2016 and its build hasn't changed since. If Steam updates the game, or you verify the game files, the original executable comes back. Run the installer again afterwards.
+Highly unlikely as Megaton Edition has been off sale since 2016 and its build hasn't changed since. But if Steam updates the game and you update or verify the game files, the original executable comes back and that new updated executable would not be supported. But again, unlikely.
 
 ## Troubleshooting
 
@@ -83,9 +85,9 @@ Megaton Edition has been off sale since 2016 and its build hasn't changed since.
 - The installer doesn't start and mentions a missing `libxcb` or `libxkbcommon` library: install your distribution's Qt or X11 runtime packages, or use `install.sh`.
 - The game starts at the wrong resolution: it saves video settings when you quit through its menu. Closing the window another way loses them.
 
-## Without the graphical installer
+## Without the graphical installer (Linux only)
 
-The same fix is available as shell scripts, which need `xdelta3` (Arch: `pacman -S xdelta3`, Debian or Ubuntu: `apt install xdelta3`):
+If the installer gives you grief, you can try the same fix as shell script, which need `xdelta3` (Arch: `pacman -S xdelta3`, Debian or Ubuntu: `apt install xdelta3`):
 
 ```sh
 git clone https://github.com/larsoyd/duke3d-megaton-ultrawide-fix
@@ -103,10 +105,6 @@ The helper the graphical installer uses also works on its own, with either build
 The engine sizes its per-column drawing buffers for screens up to 2560 pixels wide, and wider screens overrun them. The fix moves those buffers to new memory with room for 8192 columns and raises the width limit. At 2560 pixels and below the game draws the same picture as before.
 
 The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
-
-## Repository contents
-
-Scripts, the installer sources, documentation, a screenshot, the two change tables and a 1.7 KB patch file. The patch file holds the new address values and instructions to copy everything else from your own executable. None of them contain game code, and the repository has no game files.
 
 ## Credits
 
