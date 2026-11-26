@@ -37,7 +37,7 @@ func refused(format string, args ...any) error {
 func ParsePatch(manifest, changes string) (Patch, error) {
 	var p Patch
 	for _, line := range strings.Split(manifest, "\n") {
-		k, v, ok := strings.Cut(line, "=")
+		k, v, ok := strings.Cut(strings.TrimRight(line, "\r"), "=")
 		switch {
 		case ok && k == "ORIGINAL_SHA256":
 			p.OriginalSHA = v
@@ -56,7 +56,7 @@ func ParsePatch(manifest, changes string) (Patch, error) {
 		return p, refused("manifest has no EXE or BACKUP")
 	}
 	for n, line := range strings.Split(strings.TrimSpace(changes), "\n") {
-		f := strings.Split(line, "\t")
+		f := strings.Split(strings.TrimRight(line, "\r"), "\t")
 		if len(f) != 4 {
 			return p, refused("change table line %d has %d fields", n+1, len(f))
 		}

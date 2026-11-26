@@ -94,6 +94,15 @@ func (f *fixture) leftovers(t *testing.T) []string {
 	return m
 }
 
+func resolved(t *testing.T, p string) string {
+	t.Helper()
+	r, err := filepath.EvalSymlinks(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return r
+}
+
 func wantRefused(t *testing.T, err error, part string) {
 	t.Helper()
 	if err == nil || !strings.Contains(err.Error(), part) {
@@ -248,7 +257,7 @@ func TestLocateReadsLibraryFolders(t *testing.T) {
 		t.Fatal(err)
 	}
 	got := Locate(f.patches(), f.home)
-	if len(got) != 1 || got[0] != target {
+	if len(got) != 1 || got[0] != resolved(t, target) {
 		t.Fatalf("locate %v, want %s", got, target)
 	}
 }
@@ -463,7 +472,7 @@ func TestLocateFindsWindowsSteam(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Setenv("ProgramFiles(x86)", pf)
-	if got := Locate(f.patches(), f.home); len(got) != 1 || got[0] != target {
+	if got := Locate(f.patches(), f.home); len(got) != 1 || got[0] != resolved(t, target) {
 		t.Fatalf("locate %v, want %s", got, target)
 	}
 }
@@ -487,5 +496,18 @@ func TestResolutionKeepsCRLF(t *testing.T) {
 	}
 	if got := f.cfg(t); got != orig {
 		t.Fatalf("restore changed the file:\n%q", got)
+	}
+}
+
+func TestParsePatchCRLF(t *testing.T) {
+	f := newFixture(t)
+	m := fmt.Sprintf("ORIGINAL_SHA256=%s\r\nPATCHED_SHA256=%s\r\nEXE=bin/duke3d\r\nBACKUP=duke3d.megaton-original\r\n",
+		f.lin.patch.OriginalSHA, f.lin.patch.PatchedSHA)
+	p, err := ParsePatch(m, "0x00000064\t0x093c28e0\t0x098aa1c0\tumost+0\r\n0x000000c8\t0x00000a00\t0x00002000\twidth_clamp\r\n")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if p.Exe != "bin/duke3d" || p.Backup != "duke3d.megaton-original" || p.Changes[1].Label != "width_clamp" {
+		t.Fatalf("crlf parse: exe=%q backup=%q label=%q", p.Exe, p.Backup, p.Changes[1].Label)
 	}
 }
