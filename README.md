@@ -8,7 +8,7 @@ Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingw
 
 The main issue is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
 
-This is an unofficial fix. It changes the game executable you already have, keeps a backup of the original and can be undone by either restoring the backup or verifying integrity of game files.
+This is an unofficial fix with a GUI installer. The installer changes the game executable you already have, keeps a backup of the original and can be undone by either restoring the backup or verifying integrity of game files.
 
 **NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans to cover them for now.
 
