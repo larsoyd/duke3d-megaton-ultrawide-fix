@@ -10,7 +10,7 @@ Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingw
 
 This is an unofficial fix. It changes the game executable you already have, keeps a backup of the original and can be undone by either restoring the backup or verifying integrity of game files.
 
-**NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered, and there are no plans to cover them for now.
+**NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans to cover them for now.
 
 ---
 
