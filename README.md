@@ -6,52 +6,13 @@
 
 Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. macOS version is not supported but it does not work on macOS Catalina (10.15) or later anyways due to being 32-bit.
 
-**TL;DR:** On an unpatched binary the native Linux game draws a black world or black screen with only the menus and the status bar showing, while the Windows game just crashes. This is due to a maximum screen width limit set in the engine. The fix is largely to patch the engine limitations out. [Read More.](docs/how-it-works.md)
+The main issue is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
 
 This is an unofficial fix. It changes the game executable you already have, keeps a backup of the original and can be undone by either restoring the backup or verifying integrity of game files.
 
 **NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans to cover them for now.
 
 ---
-
-## Install
-
-Quit the game first. The installers are on the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases).
-
-### Linux
-
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside.
-
-The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
-
-```sh
-chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
-./DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
-```
-
-### Windows
-
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer isn't signed, so Windows may show a "Windows protected your PC" box. Choose More info, then Run anyway.
-
-### What the installer does
-
-It asks for two things:
-
-- The game folder. It fills this in when the game is in the default Steam library, otherwise use Browse.
-- The resolution. It fills this in from your main screen. The game then starts at that size without a trip to the video menu. Leave it empty to keep the game's own setting.
-
-It installs a small helper and an uninstaller in `~/.local/share/duke3d-megaton-ultrawide-fix` on Linux, or `%LOCALAPPDATA%\duke3d-megaton-ultrawide-fix` on Windows, then patches the game:
-
-1. Checks the checksum of `bin/duke3d` or `bin/duke3d.exe`. It stops if the file is a version it doesn't know.
-2. Copies the original to `bin/duke3d.megaton-original` or `bin/duke3d.exe.megaton-original` and checks the copy.
-3. Builds the patched file next to the game, checks its checksum and moves it into place.
-4. Writes the resolution to `gameroot/duke3d-local.cfg` and keeps the previous values.
-
-## Uninstall
-
-On Linux, run `~/.local/share/duke3d-megaton-ultrawide-fix/uninstall-ultrawide-fix` and choose to remove everything. On Windows, remove "Duke Nukem 3D Megaton Ultrawide Fix" in Settings > Apps > Installed apps, or run `uninstall-ultrawide-fix.exe` in its folder.
-
-It puts the original game file and your previous screen settings back. If the backup is gone, Steam can restore the original with Properties > Installed Files > Verify integrity of game files.
 
 ## Requirements
 
@@ -74,7 +35,48 @@ Windows:
 | original `bin/duke3d.exe` sha256 | `0782cf3803b847f55ec06c031eb6046c0f9edd1b49b31db30673254b99704d45` |
 | patched `bin/duke3d.exe` sha256 | `6feb94dbb140bbc57a371da42979dc4ef0bb6e1b2d89ff3a88bfb11a64045d0a` |
 
-Any failure is most likely because you are using an **unsupported older version.** It leaves any other version alone. The 20th Anniversary World Tour edition is a different program and isn't supported.
+Any failure is most likely because you are using an **unsupported older version.** The fix is to update the game on Steam.  The 20th Anniversary World Tour edition is not supported.
+
+
+## Install
+
+Quit the game first. The installers are on the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases).
+
+### Windows
+
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer isn't signed, so Windows may show a "Windows protected your PC" box. Choose More info, then Run anyway.
+
+### Linux
+
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside.
+
+The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
+
+```sh
+chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
+./DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
+```
+
+### What the installer does
+
+It asks for two things:
+
+- The game folder. It fills this in when the game is in the default Steam library, otherwise use Browse.
+- The resolution. It fills this in from your main screen. The game then starts at that size without a trip to the video menu. Leave it empty to keep the game's own setting.
+
+It installs a small helper and an uninstaller in `~/.local/share/duke3d-megaton-ultrawide-fix` on Linux, or `%LOCALAPPDATA%\duke3d-megaton-ultrawide-fix` on Windows, then patches the game:
+
+1. Checks the checksum of `bin/duke3d` or `bin/duke3d.exe`. It stops if the file is a version it doesn't know.
+2. Copies the original to `bin/duke3d.megaton-original` or `bin/duke3d.exe.megaton-original` and checks the copy.
+3. Builds the patched file next to the game, checks its checksum and moves it into place.
+4. Writes the resolution to `gameroot/duke3d-local.cfg` and keeps the previous values.
+
+## Uninstall
+
+On Linux, run `~/.local/share/duke3d-megaton-ultrawide-fix/uninstall-ultrawide-fix` and choose to remove everything. On Windows, remove "Duke Nukem 3D Megaton Ultrawide Fix" in Settings > Apps > Installed apps, or run `uninstall-ultrawide-fix.exe` in its folder.
+
+It puts the original game file and your previous screen settings back. If the backup is gone, Steam can restore the original with Properties > Installed Files > Verify integrity of game files.
+
 
 ## Steam updates 
 
@@ -105,11 +107,7 @@ cd duke3d-megaton-ultrawide-fix
 
 The helper the graphical installer uses also works on its own, with either build: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR`.
 
-## How it works
-
-The engine sizes its per-column drawing buffers for screens up to 2560 pixels wide, and wider screens overrun them. The fix moves those buffers to new memory with room for 8192 columns and raises the width limit. At 2560 pixels and below the game draws the same picture as before.
-
-The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
+---
 
 ## Credits
 
