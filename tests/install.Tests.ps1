@@ -39,6 +39,7 @@ BeforeAll {
         $argv = @('-NoProfile', '-NonInteractive', '-File', (Join-Path $Root "$Script.ps1"), '-PatchDir', $F.Patch) + $Extra
         $p = Start-Process -FilePath $Shell -ArgumentList ($argv | ForEach-Object { '"' + $_ + '"' }) -NoNewWindow -PassThru `
             -RedirectStandardOutput $log -RedirectStandardError "$log.err"
+        $null = $p.Handle # windows powershell drops the exit code unless the handle is held
         if (-not $p.WaitForExit(120000)) { $p.Kill(); throw "$Script timed out" }
         [pscustomobject]@{ Code = $p.ExitCode; Out = (Get-Content -Raw $log) + (Get-Content -Raw "$log.err") }
     }
