@@ -99,7 +99,7 @@ It puts the original game file and your previous screen settings back. If the ba
 
 ## Without the graphical installer 
 
-If the installer gives you grief, you can try the same fix as a shell script:
+If preferred, you can install the same fix as a shell script on both Linux and Windows:
 
 ### Linux
 
