@@ -143,16 +143,16 @@ powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
 
 A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, however this is highly unlikely to occur since Megaton Edition has been delisted from Steam & its build has sat abandoned for over a decade. If this happens I will update the installer to target the new binary, and all that will be needed is to run it again.
 
-## Notes:
+### Notes:
 
 I am aware that a number of HUD elements don't fill out the sides of the screen. This may be annoying, but I opted to keep the fix focused on getting the game up and running & rendering successfully, however a DN:Megaton compatible sub-mod  for this would be warmly welcomed. 
 
 If created please notify me and I will link to it here and give credit.
 
-## Credits
+### Credits
 
 Duke Nukem 3D was made by 3D Realms. The Build engine is by Ken Silverman. JFBuild and JFDuke3D are by Jonathon Fowler. Megaton Edition was ported by Gennadiy Potapov and published by Devolver Digital. Its source analyzed purely for this patch is at [github.com/TermiT/duke3d-megaton](https://github.com/TermiT/duke3d-megaton). This project isn't affiliated with any of them, and the game names and trademarks belong to their owners.
 
-## License
+### License
 
 The scripts, tools, tests and documentation here are under the MIT License, see `LICENSE`. It covers this project's own files, not the game.
