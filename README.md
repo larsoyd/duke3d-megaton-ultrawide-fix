@@ -121,8 +121,7 @@ cd duke3d-megaton-ultrawide-fix
 
 ## Notes
 
-I am aware that the HUD does not stretch. That is a cosmetic fix that I ultimately decided was out of the scope for this project.
-
+I am aware that the HUD does not fill out the sides of the screen. That remains an open regression, but it's largely a cosmetic fix that does not hamper gameplay. Because of this I decided to keep the fix focused on rendering the game successfully, but a sub-mod would be very welcomed by anyone willing to do it.
 
 ## Credits
 
