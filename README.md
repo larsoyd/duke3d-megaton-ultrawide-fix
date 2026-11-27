@@ -21,7 +21,7 @@ This is an unofficial fix with an unprivileged GUI installer. It ships with zero
 ## Requirements
 
 - Duke Nukem 3D: Megaton Edition from Steam (Steam app 225140, build 610450), either the native Linux version or the Windows version.
-- The macOS version is **not** supported however, due to the game itself being 32-bit and thus officially unsupported on modern Macs. Crossover/WINE on the Windows binary *should* work, but it has not been tested so YMMV.
+- The macOS version is **not** supported however, due to the game itself being 32-bit and thus officially unsupported on modern Macs. 
   
 - On Linux: a 64-bit desktop with glibc 2.28 or newer. This covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland.
 - On Windows: 64-bit Windows 10 or 11.
