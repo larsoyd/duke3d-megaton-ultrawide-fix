@@ -72,7 +72,7 @@ chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ./DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ```
 
-**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` as well. If you later switch the game from using your Proton runner back to the Native runtime and/or to a **different** Proton runner then you might need to patch the binary again if it hasnt been patched in that runner previously.
+**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` as well. If you later switch the game from using your Proton runner back to the Native runtime and/or to a **different** Proton runner then you will need to patch the binary again if it hasnt been patched in that runner previously.
 
 ---
 
@@ -144,9 +144,11 @@ powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
 
 A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, however this is highly unlikely to occur since Megaton Edition has been delisted from Steam & its build has sat abandoned for over a decade. If this happens I will update the installer to target the new binary, and all that will be needed is to run it again.
 
-## Known Issue(s)
+## Notes:
 
-I am aware that a number of HUD elements don't fill out the sides of the screen. This may be annoying, but I opted to keep the fix focused on getting the game up and running & rendering successfully, however a DN:Megaton compatible sub-mod  for this would be warmly welcomed. If created please notify me and I will link to it here and give credit.
+I am aware that a number of HUD elements don't fill out the sides of the screen. This may be annoying, but I opted to keep the fix focused on getting the game up and running & rendering successfully, however a DN:Megaton compatible sub-mod  for this would be warmly welcomed. 
+
+If created please notify me and I will link to it here and give credit.
 
 ## Credits
 
