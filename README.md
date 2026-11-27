@@ -59,6 +59,8 @@ The installers are on the [releases page](https://github.com/larsoyd/duke3d-mega
 
 Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer isn't signed, so Windows may show a "Windows protected your PC" box. Choose More info, then Run anyway.
 
+---
+
 ### Linux
 
 Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. Alternatively, the release also has the installer as a bare `.run` file. Note that a downloaded file is never marked as a program, so to use it mark it first in your file manager (Properties > Permissions) or run:
@@ -92,23 +94,9 @@ On Linux, run `~/.local/share/duke3d-megaton-ultrawide-fix/uninstall-ultrawide-f
 It puts the original game file and your previous screen settings back. If the backup is gone, Steam can restore the original with Properties > Installed Files > Verify integrity of game files.
 
 
-## Steam updates 
-
-A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, however this is highly unlikely to occur since Megaton Edition has been delisted from Steam & its build has sat abandoned for over a decade. If this happens I will update the installer to target the new binary, and all that will be needed is to run it again.
-
-## Troubleshooting
-
-- `refused: unknown executable`: the game is a different build, or something else has changed it. Verify the game files in Steam and try again.
-- `refused: game not found`: add `--game-dir` with the folder that contains `bin/duke3d` or `bin/duke3d.exe`.
-- `refused: backup ... is not the original`: there is already a different file called `duke3d.megaton-original` or `duke3d.exe.megaton-original`. Move it somewhere else and run the installer again.
-- Access denied on Windows: the game is still running, or something else has the game file open. Quit it and run the installer again.
-- `xdelta3 is not installed` from `install.sh`: install the `xdelta3` package, or use the graphical installer.
-- The installer doesn't start and mentions a missing `libxcb` or `libxkbcommon` library: install your distribution's Qt or X11 runtime packages, or use `install.sh`.
-- The game starts at the wrong resolution: it saves video settings when you quit through its menu. Closing the window another way loses them.
-
 ## Without the graphical installer 
 
-If the installer still gives you grief, you can try the same fix as a shell script:
+If the installer gives you grief, you can try the same fix as a shell script:
 
 ### Linux
 
@@ -123,9 +111,26 @@ cd duke3d-megaton-ultrawide-fix
 
 `install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it. They only handle the native Linux build.
 
+---
+
 ### Windows
 
 TODO
+
+
+## Troubleshooting
+
+- `refused: unknown executable`: the game is a different build, or something else has changed it. Verify the game files in Steam and try again.
+- `refused: game not found`: add `--game-dir` with the folder that contains `bin/duke3d` or `bin/duke3d.exe`.
+- `refused: backup ... is not the original`: there is already a different file called `duke3d.megaton-original` or `duke3d.exe.megaton-original`. Move it somewhere else and run the installer again.
+- Access denied on Windows: the game is still running, or something else has the game file open. Quit it and run the installer again.
+- `xdelta3 is not installed` from `install.sh`: install the `xdelta3` package, or use the graphical installer.
+- The installer doesn't start and mentions a missing `libxcb` or `libxkbcommon` library: install your distribution's Qt or X11 runtime packages, or use `install.sh`.
+- The game starts at the wrong resolution: it saves video settings when you quit through its menu. Closing the window another way loses them.
+
+## Steam updates 
+
+A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, however this is highly unlikely to occur since Megaton Edition has been delisted from Steam & its build has sat abandoned for over a decade. If this happens I will update the installer to target the new binary, and all that will be needed is to run it again.
 
 ## Notes
 
