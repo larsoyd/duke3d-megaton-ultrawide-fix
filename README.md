@@ -99,7 +99,9 @@ It puts the original game file and your previous screen settings back. If the ba
 
 ## Without the graphical installer 
 
-If preferred or necessary, you can also install the fix without using the GUI installer by using a shell script on both Linux and Windows:
+If preferred or necessary, you can also install the fix without using the GUI installer by using a shell script on both Linux and Windows. 
+
+Do note that these are for their respective builds, meaning if you use the Windows build on Linux under Proton then you need to patch it with Powershell which can be installed on Linux from most mainline package repositories.
 
 ### Linux
 
@@ -112,7 +114,7 @@ cd duke3d-megaton-ultrawide-fix
 ./uninstall.sh
 ```
 
-`install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it. They only handle the native Linux build.
+`install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it. Reminder: Only handles the native Linux build.
 
 ---
 
@@ -127,7 +129,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
 ```
 
-`-ExecutionPolicy Bypass` only applies to that one run and needs no administrator rights. `install.ps1` looks for the game in your Steam libraries, including extra library folders. Give it `-GameDir` with the game folder if it finds more than one copy or none. Like the Linux scripts they don't change the resolution. They only handle the Windows build.
+`-ExecutionPolicy Bypass` only applies to that one run and needs no administrator rights. `install.ps1` looks for the game in your Steam libraries, including extra library folders. Give it `-GameDir` with the game folder if it finds more than one copy or none. Like the Linux scripts they don't change the resolution. Reminder: Only handles the Windows executable.
 
 
 ## Troubleshooting
@@ -144,9 +146,9 @@ powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
 
 A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, however this is highly unlikely to occur since Megaton Edition has been delisted from Steam & its build has sat abandoned for over a decade. If this happens I will update the installer to target the new binary, and all that will be needed is to run it again.
 
-## Notes
+## Known Issue(s)
 
-I am aware that a number of HUD elements don't fill out the sides of the screen. I opted to keep the fix focused on both playing & rendering the game successfully, however a sub-mod  for this  by anyone willing to do it would be very welcomed and linked to & credited here.
+I am aware that a number of HUD elements don't fill out the sides of the screen. This may be annoying, but I opted to keep the fix focused on getting the game up and running & rendering successfully, however a DN:Megaton compatible sub-mod  for this would be warmly welcomed. If created please notify me and I will link to it here and give credit.
 
 ## Credits
 
