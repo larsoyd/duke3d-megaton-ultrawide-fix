@@ -68,7 +68,7 @@ chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ./DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ```
 
-**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` as well. If you switch the game from the Native runtime to Proton (or from that to any **different** Proton runner) you might need to patch the game again if the binary in that runner hasn't been patched previously.
+**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` as well. If you later switch the game from using your Proton runner back to the Native runtime and/or to a **different** Proton runner then you might need to patch the binary again if it hasnt been patched in that runner previously.
 
 
 ### What the installer does
@@ -151,9 +151,7 @@ TODO
 
 ## Notes
 
-I am aware that the HUD does not fill out the sides of the screen. That remains an open cosmetic regression, but it's largely a harmless visual bug that does not hamper gameplay. 
-
-I opted to keep the fix focused on rendering the game successfully, however a sub-mod  for this  by anyone willing to do it would be very welcomed and linked to & credited here.
+I am aware that a number of HUD elements don't fill out the sides of the screen. I opted to keep the fix focused on both playing & rendering the game successfully, however a sub-mod  for this  by anyone willing to do it would be very welcomed and linked to & credited here.
 
 ## Credits
 
