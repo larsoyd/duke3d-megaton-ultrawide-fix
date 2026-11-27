@@ -55,6 +55,8 @@ Any failure is most likely because you are using an **unsupported/modified versi
 
 The installers are on the [releases page](https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/releases). The game must not be running when doing this operation.
 
+---
+
 ### Windows
 
 Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer isn't signed, so Windows may show a "Windows protected your PC" box. Choose More info, then Run anyway.
@@ -72,6 +74,7 @@ chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 
 **NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` as well. If you later switch the game from using your Proton runner back to the Native runtime and/or to a **different** Proton runner then you might need to patch the binary again if it hasnt been patched in that runner previously.
 
+---
 
 ### What the installer does
 
