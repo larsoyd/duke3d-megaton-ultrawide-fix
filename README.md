@@ -53,7 +53,9 @@ Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer 
 
 ### Linux
 
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. **NOTE:** If you play on the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder as well.
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. 
+
+**NOTE:** If you play on the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder as well.
 
 
 The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
