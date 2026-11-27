@@ -1,4 +1,4 @@
-# Duke Nukem 3D: Megaton Edition - Ultrawide Fix
+# <p align="center">Duke Nukem 3D: Megaton Edition - Ultrawide Fix</p>
 
 <table align="center"><tr><td>
   <img src="docs/screenshot-3440x1440.jpg" alt="Duke Nukem 3D: Megaton Edition running at 3440x1440" width="560">
@@ -57,7 +57,7 @@ Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer 
 
 Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. 
 
-**NOTE:** If you play on the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder as well.
+**NB:** If you play with the Windows version of the game on Linux through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder on Linux as well. If you switch to and from Native or Proton you need to patch again if you haven't already.
 
 
 The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
@@ -90,7 +90,7 @@ It puts the original game file and your previous screen settings back. If the ba
 
 ## Steam updates 
 
-Highly unlikely as Megaton Edition has been off sale since 2016 and its build hasn't changed since. But if Steam updates the game and you update or verify the game files, the original executable comes back and that new updated executable would not be supported until an update of the fix. But again, unlikely.
+A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, but this is highly unlikely to occur since Megaton Edition has been unlisted from Steam & abandoned for over a decade and its build hasn't changed since its delisting. If that happens then I will update the fix to target the new binary and you must run the new installer again.
 
 ## Troubleshooting
 
@@ -117,11 +117,12 @@ cd duke3d-megaton-ultrawide-fix
 
 `install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it. They only handle the native Linux build.
 
----
 
 ## Notes
 
-I am aware that the HUD does not fill out the sides of the screen. That remains an open regression, but it's largely a cosmetic fix that does not hamper gameplay. Because of this I decided to keep the fix focused on rendering the game successfully, but a sub-mod would be very welcomed by anyone willing to do it.
+I am aware that the HUD does not fill out the sides of the screen. That remains an open cosmetic regression, but it's largely a harmless visual bug that does not hamper gameplay. 
+
+I opted to keep the fix focused on rendering the game successfully, however a sub-mod  for this  by anyone willing to do it would be very welcomed and would be linked to here.
 
 ## Credits
 
