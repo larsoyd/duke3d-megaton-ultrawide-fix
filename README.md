@@ -61,17 +61,15 @@ Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer 
 
 ### Linux
 
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. 
-
-**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder on Linux as well. When you install a new runner, i.e if you switch the game from the Native version to Proton you need to run the installer again to patch the new binary.
-
-
-The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. Alternatively, the release also has the installer as a bare `.run` file. Note that a downloaded file is never marked as a program, so to use it mark it first in your file manager (Properties > Permissions) or run:
 
 ```sh
 chmod +x DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ./DukeNukem3D-Megaton-UltrawideFix-1.1.1.run
 ```
+
+**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` as well. If you switch the game from the Native runtime to Proton (or from that to any **different** Proton runner) you might need to patch the game again if the binary in that runner hasn't been patched previously.
+
 
 ### What the installer does
 
