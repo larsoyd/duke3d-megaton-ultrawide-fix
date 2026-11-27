@@ -99,9 +99,7 @@ It puts the original game file and your previous screen settings back. If the ba
 
 ## Without the graphical installer 
 
-If preferred or necessary, you can also install the fix without using the GUI installer by using a shell script on both Linux and Windows. 
-
-Do note that these are for their respective builds, meaning if you use the Windows build on Linux under Proton then you need to patch it with Powershell which can be installed on Linux from most mainline package repositories.
+If preferred or necessary, you can also install the fix without using the GUI installer by using a shell script on both Linux and Windows. Do note that these are only for their respective builds.
 
 ### Linux
 
