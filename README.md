@@ -16,7 +16,7 @@ This is an unofficial fix with an unprivileged GUI installer. It ships with zero
 
 The main issue fixed is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
 
-**NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans to cover them for now.
+**NB:** The fix only supports ultrawide screens up to **1600 pixels tall**, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans at the moment to cover those resolutions.
 
 ---
 
@@ -106,11 +106,25 @@ A hypothetical update to the game that did not fix this issue would cause your g
 
 ## Without the graphical installer 
 
-If the GUI fails you can try to run the helper that the graphical installer uses. It works on its own with either build on Windows and Linux. Replace DIR with the directory path. Do note that on Windows it's unsigned, so SmartScreen will warn, and nobody can read it before running it.
+If the GUI fails you can try to run the helper that the graphical installer uses. It works on its own with either build on Windows and Linux - 3440x1440 is an example resolution, replace it with yours:
 
-* On Linux in your Terminal: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR` in your terminal. 
+Windows (Powershell 7):
+```pwsh
+# Install
+.\duke3d-ultrawide.exe install --game-dir "C:\...\Duke Nukem 3D" --resolution 3440x1440
 
-* On Windows in Powershell: `duke3d-ultrawide.exe install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide.exe uninstall --game-dir DIR`
+# Uninstall
+.\duke3d-ultrawide.exe uninstall --game-dir "C:\...\Duke Nukem 3D"
+```
+
+Linux:
+```bash
+# Install
+./duke3d-ultrawide install --game-dir "/path/to/Duke Nukem 3D" --resolution 3440x1440
+
+# Uninstall
+./duke3d-ultrawide uninstall --game-dir "/path/to/Duke Nukem 3D"
+```
 
 ---
 
