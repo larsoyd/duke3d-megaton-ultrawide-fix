@@ -38,7 +38,7 @@ Windows:
 | original `bin/duke3d.exe` sha256 | `0782cf3803b847f55ec06c031eb6046c0f9edd1b49b31db30673254b99704d45` |
 | patched `bin/duke3d.exe` sha256 | `6feb94dbb140bbc57a371da42979dc4ef0bb6e1b2d89ff3a88bfb11a64045d0a` |
 
-Any failure is most likely because you are using an **unsupported older version.** The fix is to update the game on Steam.  The 20th Anniversary World Tour edition is not supported.
+Any failure is most likely because you are using an **unsupported/modified version of the game.**  The 20th Anniversary World Tour edition is not supported.
 
 
 ## Install
