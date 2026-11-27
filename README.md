@@ -1,8 +1,12 @@
 # <p align="center">Duke Nukem 3D: Megaton Edition - Ultrawide Fix</p>
 
-<table align="center"><tr><td>
-  <img src="docs/screenshot-3440x1440.jpg" alt="Duke Nukem 3D: Megaton Edition running at 3440x1440" width="560">
-</td></tr></table>
+<table align="center">
+  <tr><td align="center">
+    <img src="docs/screenshot-3440x1440.jpg" alt="Duke Nukem 3D: Megaton Edition running at 3440x1440" width="560">
+    <br>
+    <b>Resolution: 3440x1440</b>
+  </td></tr>
+</table>
 
 <p align="center">
   <a href="https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
