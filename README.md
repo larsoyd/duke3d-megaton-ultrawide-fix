@@ -98,9 +98,11 @@ Highly unlikely as Megaton Edition has been off sale since 2016 and its build ha
 - The installer doesn't start and mentions a missing `libxcb` or `libxkbcommon` library: install your distribution's Qt or X11 runtime packages, or use `install.sh`.
 - The game starts at the wrong resolution: it saves video settings when you quit through its menu. Closing the window another way loses them.
 
-## Without the graphical installer (Linux only)
+## Without the graphical installer 
 
-If the installer gives you grief, you can try the same fix as shell script, which need `xdelta3` (Arch: `pacman -S xdelta3`, Debian or Ubuntu: `apt install xdelta3`):
+The helper the graphical installer uses also works on its own, with either build: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR`.
+
+If the installer gives you grief, you can try the same fix as shell script (Linux/WSL only), which need `xdelta3` (Arch: `$ pacman -S xdelta3`, Debian or Ubuntu: `$ apt install xdelta3`):
 
 ```sh
 git clone https://github.com/larsoyd/duke3d-megaton-ultrawide-fix
@@ -110,8 +112,6 @@ cd duke3d-megaton-ultrawide-fix
 ```
 
 `install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it. They only handle the native Linux build.
-
-The helper the graphical installer uses also works on its own, with either build: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR`.
 
 ---
 
