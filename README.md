@@ -15,9 +15,7 @@
 This is a binary patch that allows [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) to run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. It ships with zero game code/assets. The installer only changes the game executable from Steam that you already have and then keeps a backup of the original. This can be undone by either restoring the backup or verifying integrity of game files.
 
 
-Currently the game crashes or renders with a black screen except for the HUD depending on what version & resolution you are playing with on ultrawide resolutions. This is unlikely to be patched since the game itself has sadly been removed from all storefronts, including Steam. This fix exists for those who still owns the game on Steam and who want to play it on ultrawide resolutions. 
-
-The main issue fixed is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
+Currently the game crashes or renders with a black screen except for the HUD depending on what version & resolution you are playing with on ultrawide resolutions. The main issue fixed is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
 
 **NB:** The fix only supports ultrawide screens up to **1600 pixels tall**, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans at the moment to cover those resolutions.
 
