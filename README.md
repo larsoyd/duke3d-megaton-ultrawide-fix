@@ -22,11 +22,13 @@ The main issue fixed is that the engine sizes its per-column drawing buffers for
 
 ## Requirements
 
-- Duke Nukem 3D: Megaton Edition from Steam (Steam app 225140, build 610450), either the native Linux version or the Windows version.
-- The macOS version is **not** supported however, due to the game itself being 32-bit and thus officially unsupported on modern Macs. 
+- Duke Nukem 3D: Megaton Edition from Steam (Steam app 225140, build 610450), either the native **Linux** version or the **Windows** version.
+- The macOS version is **not** supported due to the game itself being 32-bit and thus officially unsupported on modern Macs. 
   
 - On Linux: a 64-bit desktop with glibc 2.28 or newer. This covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland.
 - On Windows: 64-bit Windows 10 or 11.
+
+---
 
 The fix only works with these executable checksums which are checked by the installer:
 
@@ -57,7 +59,7 @@ Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer 
 
 Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. 
 
-**NB:** If you play with the Windows version of the game on Linux through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder on Linux as well. If you switch to and from Native or Proton you need to patch again if you haven't already.
+**NB:** If you play with the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder on Linux as well. When you install a new runner, i.e if you switch the game from the Native version to Proton you need to run the installer again to patch the new binary.
 
 
 The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
@@ -90,7 +92,7 @@ It puts the original game file and your previous screen settings back. If the ba
 
 ## Steam updates 
 
-A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, but this is highly unlikely to occur since Megaton Edition has been unlisted from Steam & abandoned for over a decade and its build hasn't changed since its delisting. If that happens then I will update the fix to target the new binary and you must run the new installer again.
+A hypothetical update to the game that did not fix this issue would cause your game to be broken again as it would overwrite the patched binary, however this is highly unlikely to occur since Megaton Edition has been delisted from Steam & its build has sat abandoned for over a decade. If this happens I will update the installer to target the new binary, and all that will be needed is to run it again.
 
 ## Troubleshooting
 
@@ -104,9 +106,19 @@ A hypothetical update to the game that did not fix this issue would cause your g
 
 ## Without the graphical installer 
 
-The helper the graphical installer uses also works on its own, with either build: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR`.
+If the GUI fails you can try to run the helper that the graphical installer uses. It works on its own with either build on Windows and Linux. Replace DIR with the directory path. Do note that on Windows it's unsigned, so SmartScreen will warn, and nobody can read it before running it.
 
-If the installer gives you grief, you can try the same fix as shell script (Linux only), which need `xdelta3` (Arch: `$ pacman -S xdelta3`, Debian or Ubuntu: `$ apt install xdelta3`):
+* On Linux in your Terminal: `duke3d-ultrawide install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide uninstall --game-dir DIR` in your terminal. 
+
+* On Windows in Powershell: `duke3d-ultrawide.exe install --game-dir DIR --resolution 3440x1440`, and `duke3d-ultrawide.exe uninstall --game-dir DIR`
+
+---
+
+If the installer still gives you grief, you can try the same fix as a shell script:
+
+### Linux
+
+The shell script needs `xdelta3` to function, install it from your distro's repositories (Arch: `$ pacman -S xdelta3`, Debian or Ubuntu: `$ apt install xdelta3`):
 
 ```sh
 git clone https://github.com/larsoyd/duke3d-megaton-ultrawide-fix
@@ -117,12 +129,15 @@ cd duke3d-megaton-ultrawide-fix
 
 `install.sh` looks for the game in your Steam libraries, including extra library folders and Flatpak Steam. Give it `--game-dir` with the game folder if it finds more than one copy or none. The scripts don't change the resolution, so pick it in the game's video options and quit through the menu to save it. They only handle the native Linux build.
 
+### Windows
+
+TODO
 
 ## Notes
 
 I am aware that the HUD does not fill out the sides of the screen. That remains an open cosmetic regression, but it's largely a harmless visual bug that does not hamper gameplay. 
 
-I opted to keep the fix focused on rendering the game successfully, however a sub-mod  for this  by anyone willing to do it would be very welcomed and would be linked to here.
+I opted to keep the fix focused on rendering the game successfully, however a sub-mod  for this  by anyone willing to do it would be very welcomed and linked to & credited here.
 
 ## Credits
 
