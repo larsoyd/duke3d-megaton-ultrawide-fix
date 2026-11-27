@@ -12,7 +12,7 @@ Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingw
 
 The main issue is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
 
-This is an unofficial fix with a GUI installer. It ships with zero game code/assets. The installer only changes the game executable you already have and then keeps a backup of the original. This can be undone by either restoring the backup or verifying integrity of game files.
+This is an unofficial fix with an unprivileged GUI installer. It ships with zero game code/assets. The installer only changes the game executable you already have and then keeps a backup of the original. This can be undone by either restoring the backup or verifying integrity of game files.
 
 **NOTE:** Ultrawide here means ultrawide screens up to 1600 pixels tall, such as 3440x1440 or 3840x1600. Taller ultrawide modes such as 5120x2160 aren't covered and will still break, there are no plans to cover them for now.
 
@@ -23,7 +23,6 @@ This is an unofficial fix with a GUI installer. It ships with zero game code/ass
 - Duke Nukem 3D: Megaton Edition from Steam (Steam app 225140, build 610450), either the native Linux version or the Windows version.
 - On Linux: a 64-bit desktop with glibc 2.28 or newer, which covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland. If you play the Windows version through Proton, use the Linux installer. It finds `bin/duke3d.exe` in the same game folder.
 - On Windows: 64-bit Windows 10 or 11.
-- No root access. On Windows the installer asks for no administrator rights.
 
 The fix works with these executables:
 
