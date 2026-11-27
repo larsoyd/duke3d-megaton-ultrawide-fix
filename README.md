@@ -23,7 +23,6 @@ This is an unofficial fix with an unprivileged GUI installer. It ships with zero
 - Duke Nukem 3D: Megaton Edition from Steam (Steam app 225140, build 610450), either the native Linux version or the Windows version.
 - On Linux: a 64-bit desktop with glibc 2.28 or newer, which covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland.
 - On Windows: 64-bit Windows 10 or 11.
-- **NOTE:** If you play on the Windows version through Proton due to native version bugs outside the scope of this fix, you should still use the Linux installer. It automatically finds & fixes `bin/duke3d.exe` in the same game folder as well.
 
 The fix works with these executable checksums which are checked by the installer:
 
@@ -52,7 +51,8 @@ Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.exe` and run it. The installer 
 
 ### Linux
 
-Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside.
+Download `DukeNukem3D-Megaton-UltrawideFix-1.1.1.tar.gz`, extract it and double-click the installer inside. **NOTE:** If you play on the Windows version through Proton you should still use the Linux installer. I have written it so it finds & fixes `bin/duke3d.exe` in the same game folder as well.
+
 
 The release also has the installer as a bare `.run` file. A downloaded file is never marked as a program, so mark it first in your file manager (Properties > Permissions) or run:
 
