@@ -108,28 +108,6 @@ A hypothetical update to the game that did not fix this issue would cause your g
 
 ## Without the graphical installer 
 
-If the GUI fails you can try to run the helper that the graphical installer uses. It works on its own with either build on Windows and Linux - 3440x1440 is an example resolution, replace it with yours:
-
-Windows (Powershell 7):
-```pwsh
-# Install
-.\duke3d-ultrawide.exe install --game-dir "C:\...\Duke Nukem 3D" --resolution 3440x1440
-
-# Uninstall
-.\duke3d-ultrawide.exe uninstall --game-dir "C:\...\Duke Nukem 3D"
-```
-
-Linux:
-```bash
-# Install
-./duke3d-ultrawide install --game-dir "/path/to/Duke Nukem 3D" --resolution 3440x1440
-
-# Uninstall
-./duke3d-ultrawide uninstall --game-dir "/path/to/Duke Nukem 3D"
-```
-
----
-
 If the installer still gives you grief, you can try the same fix as a shell script:
 
 ### Linux
