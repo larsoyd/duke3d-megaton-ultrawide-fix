@@ -8,7 +8,7 @@
   <a href="https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
 </p>
 
-Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. macOS version is not supported but it does not work on macOS Catalina (10.15) or later anyways due to being 32-bit.
+Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. 
 
 The main issue is that the engine sizes its per-column drawing buffers for screens only up to 2560 pixels wide, wider screens overrun them. This fix moves those buffers to new memory with room for 8192 columns and then raises the width limit. The details are in [docs/how-it-works.md](docs/how-it-works.md), and the tested resolutions and the test tools in [docs/testing.md](docs/testing.md).
 
@@ -21,7 +21,9 @@ This is an unofficial fix with an unprivileged GUI installer. It ships with zero
 ## Requirements
 
 - Duke Nukem 3D: Megaton Edition from Steam (Steam app 225140, build 610450), either the native Linux version or the Windows version.
-- On Linux: a 64-bit desktop with glibc 2.28 or newer, which covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland.
+- The macOS version is **not** supported however, due to the game itself being 32-bit and thus officially unsupported on modern Macs. Crossover/WINE on the Windows binary *should* work, but it has not been tested so YMMV.
+  
+- On Linux: a 64-bit desktop with glibc 2.28 or newer. This covers Ubuntu 20.04, Debian 10, Fedora 29, SteamOS 3 and anything newer. On Wayland the installer window runs through XWayland.
 - On Windows: 64-bit Windows 10 or 11.
 
 The fix works with these executable checksums which are checked by the installer:
