@@ -118,7 +118,16 @@ cd duke3d-megaton-ultrawide-fix
 
 ### Windows
 
-TODO
+The PowerShell scripts need nothing extra, they run in the Windows PowerShell that comes with Windows 10 and 11. Without git, use Code > Download ZIP on the repository page and extract it:
+
+```powershell
+git clone https://github.com/larsoyd/duke3d-megaton-ultrawide-fix
+cd duke3d-megaton-ultrawide-fix
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
+```
+
+`-ExecutionPolicy Bypass` only applies to that one run and needs no administrator rights. `install.ps1` looks for the game in your Steam libraries, including extra library folders. Give it `-GameDir` with the game folder if it finds more than one copy or none. Like the Linux scripts they don't change the resolution. They only handle the Windows build.
 
 
 ## Troubleshooting

@@ -43,6 +43,39 @@ jobs:
           test "$(wc -l < "$d/changes.tsv")" = 353
           xdelta3 printhdr "$d/duke3d.xdelta" > /dev/null
           test "$(wc -l < patches/megaton-1.4.9-windows/changes.tsv)" = 399
+  powershell:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: modules
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $PSVersionTable.PSVersion.ToString()
+          Install-Module Pester -RequiredVersion 6.2.0 -Scope CurrentUser -Force -SkipPublisherCheck
+          Install-Module PSScriptAnalyzer -RequiredVersion 1.25.0 -Scope CurrentUser -Force
+      - name: lint
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $skip = 'PSReviewUnusedParameter', 'PSUseShouldProcessForStateChangingFunctions', 'PSAvoidUsingPositionalParameters'
+          $r = Get-ChildItem install.ps1, uninstall.ps1, lib/*.ps1, tests/*.ps1 | ForEach-Object { Invoke-ScriptAnalyzer -Path $_.FullName -ExcludeRule $skip }
+          $r | Format-Table -AutoSize RuleName, ScriptName, Line, Message
+          "[lint] findings=$(@($r).Count)"
+          if ($r) { exit 1 }
+      - name: tests
+        run: |
+          Import-Module Pester -RequiredVersion 6.2.0
+          $c = New-PesterConfiguration
+          $c.Run.Path = 'tests/install.Tests.ps1'
+          $c.Run.Exit = $true
+          $c.Output.Verbosity = 'Detailed'
+          Invoke-Pester -Configuration $c
   installer:
     runs-on: ubuntu-22.04
     needs: test
