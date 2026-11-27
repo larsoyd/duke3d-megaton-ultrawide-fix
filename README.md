@@ -1,7 +1,11 @@
 # Duke Nukem 3D: Megaton Edition - Ultrawide Fix
 
-<p align="center">
+<table align="center"><tr><td>
   <img src="docs/screenshot-3440x1440.jpg" alt="Duke Nukem 3D: Megaton Edition running at 3440x1440" width="560">
+</td></tr></table>
+
+<p align="center">
+  <a href="https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://github.com/larsoyd/duke3d-megaton-ultrawide-fix/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
 </p>
 
 Lets the now discontinued [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. macOS version is not supported but it does not work on macOS Catalina (10.15) or later anyways due to being 32-bit.
