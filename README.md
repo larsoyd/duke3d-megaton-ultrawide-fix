@@ -10,7 +10,7 @@
 
 This is a binary patch that allows [Duke Nukem 3D: Megaton Edition](https://www.pcgamingwiki.com/wiki/Duke_Nukem_3D:_Megaton_Edition) (Steam) to run at resolutions wider than 2560 pixels, such as 3440x1440. It works with the native Linux build and with the Windows build, on Windows or on Linux through Proton. 
 
-Currently the game crashes or renders with a black screen except for the HUD depending on what version & resolution you are playing with ultrawide resolutions. This is unlikely to be patched since the game itself has sadly been removed from all storefronts, including Steam. This fix exists for those who still owns the game on Steam and who wish to play it on ultrawide resolutions. 
+Currently the game crashes or renders with a black screen except for the HUD depending on what version & resolution you are playing with on ultrawide resolutions. This is unlikely to be patched since the game itself has sadly been removed from all storefronts, including Steam. This fix exists for those who still owns the game on Steam and who wish to play it on ultrawide resolutions. 
 
 This is an unofficial fix with an unprivileged GUI installer. It ships with zero game code/assets. The installer only changes the game executable from Steam that you already have and then keeps a backup of the original. This can be undone by either restoring the backup or verifying integrity of game files.
 
